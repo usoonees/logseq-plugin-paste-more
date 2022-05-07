@@ -8,23 +8,19 @@ async function main() {
 
   const turndownService = new TurndownService({
     "headingStyle": "atx",
-    "codeBlockStyle": "fenced"
+    "codeBlockStyle": "fenced",
   })
 
-
   mainContentContainer.addEventListener("paste", (e) => {
-    let result = ""
     const html = e.clipboardData.getData('text/html')
     if(html !== "") {
-      result = turndownService.turndown(html)
-    } else {
-      result = e.clipboardData.getData('text')
+      const markdown = turndownService.turndown(html)
+      console.log("markdown", markdown);
+      logseq.Editor.insertAtEditingCursor(markdown)
+
+      e.preventDefault()
+      e.stopPropagation()
     }
-
-    logseq.Editor.insertAtEditingCursor(result)
-
-    e.preventDefault()
-    e.stopPropagation()
   })
 
 }
