@@ -11,11 +11,14 @@ async function main() {
     "codeBlockStyle": "fenced",
   })
 
+  turndownService.remove('style')
+
   mainContentContainer.addEventListener("paste", (e) => {
     const html = e.clipboardData.getData('text/html')
     if(html !== "") {
-      const markdown = turndownService.turndown(html)
-      // console.log("markdown", markdown);
+      // console.log("=== debug: html source\n", html);
+      const markdown = turndownService.turndown(html).trim()
+      // console.log("=== debug: markdown result\n", markdown);
       logseq.Editor.insertAtEditingCursor(markdown)
 
       e.preventDefault()
