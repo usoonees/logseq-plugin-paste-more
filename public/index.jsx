@@ -14,6 +14,10 @@ async function main() {
   turndownService.remove('style')
 
   const pasteHandler = (e) => {
+    if(e.clipboardData.files.length > 0) {
+      return
+    }
+
     const html = e.clipboardData.getData('text/html')
     if(html !== "") {
       // console.log("=== debug: html source\n", html);
