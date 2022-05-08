@@ -13,7 +13,7 @@ async function main() {
 
   turndownService.remove('style')
 
-  mainContentContainer.addEventListener("paste", (e) => {
+  const pasteHandler = (e) => {
     const html = e.clipboardData.getData('text/html')
     if(html !== "") {
       // console.log("=== debug: html source\n", html);
@@ -24,8 +24,13 @@ async function main() {
       e.preventDefault()
       e.stopPropagation()
     }
-  })
+  }
 
+  mainContentContainer.addEventListener("paste", pasteHandler)
+
+  logseq.beforeunload(async () => {
+    mainContentContainer.removeEventListener("paste", pasteHandler)
+  })
 }
 
 
