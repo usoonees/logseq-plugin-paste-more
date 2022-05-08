@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@logseq/libs@^0.0.1-alpha.35":
-  version "0.0.1-alpha.35"
-  resolved "https://registry.npmmirror.com/@logseq/libs/-/libs-0.0.1-alpha.35.tgz#bd382c9cd209ba03a9d289d7b042c96f6b34ab9d"
-  integrity sha512-KikcqgolrTFqlEWoiprAdRsz9kwUX3XwcjzWa9usBGLwgGCpq6E/1UvvhQweJJAXAGDUVUHIzdJ6Cm6pvuOBWQ==
+"@logseq/libs@^0.0.6":
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/@logseq/libs/-/libs-0.0.6.tgz#a8270d5bd71bccf13455634f9a2aac2572a0b935"
+  integrity sha512-0Fv+Wdno5m0EA9xW6tRRvoKNPAF5nznpi6A1bBjh8aq4XMt7rGvhHbsH+u84/nswCYlce3t2Q/ei8CRK8iWbdw==
   dependencies:
     csstype "3.0.8"
     debug "4.3.1"
@@ -27,6 +27,11 @@ debug@4.3.1:
   integrity sha512-doEwdvm4PCeK4K3RQN2ZC2BYUBaxwLARCqZmMjtF8a51J2Rb0xpVloFRnCODwqjpwnAoao4pelN8l3RJdv3gRQ==
   dependencies:
     ms "2.1.2"
+
+domino@^2.1.6:
+  version "2.1.6"
+  resolved "https://registry.yarnpkg.com/domino/-/domino-2.1.6.tgz#fe4ace4310526e5e7b9d12c7de01b7f485a57ffe"
+  integrity sha512-3VdM/SXBZX2omc9JF9nOPCtDaYQ67BGp5CoLpIQlO2KCAPETs8TcDHacF26jXadGbvUteZzRTeos2fhID5+ucQ==
 
 dompurify@2.3.1:
   version "2.3.1"
@@ -106,6 +111,13 @@ tslib@^2.0.3:
   version "2.3.1"
   resolved "https://registry.npmmirror.com/tslib/-/tslib-2.3.1.tgz#e8a335add5ceae51aa261d32a490158ef042ef01"
   integrity sha512-77EbyPPpMz+FRFRuAFlWMtmgUWGe9UOG2Z25NqCwiIjRhOf5iKGuzSe5P2w1laq+FkRy4p+PCuVkJSGkzTEKVw==
+
+turndown@^7.1.1:
+  version "7.1.1"
+  resolved "https://registry.yarnpkg.com/turndown/-/turndown-7.1.1.tgz#96992f2d9b40a1a03d3ea61ad31b5a5c751ef77f"
+  integrity sha512-BEkXaWH7Wh7e9bd2QumhfAXk5g34+6QUmmWx+0q6ThaVOLuLUqsnkq35HQ5SBHSaxjSfSM7US5o4lhJNH7B9MA==
+  dependencies:
+    domino "^2.1.6"
 
 util@^0.10.3:
   version "0.10.4"
