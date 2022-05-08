@@ -15,7 +15,7 @@ async function main() {
     const html = e.clipboardData.getData('text/html')
     if(html !== "") {
       const markdown = turndownService.turndown(html)
-      console.log("markdown", markdown);
+      // console.log("markdown", markdown);
       logseq.Editor.insertAtEditingCursor(markdown)
 
       e.preventDefault()
