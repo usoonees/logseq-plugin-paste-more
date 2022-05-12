@@ -12,6 +12,7 @@
     "serve": "wmr serve"
   },
   "dependencies": {
+    "@guyplusplus/turndown-plugin-gfm": "^1.0.7",
     "@logseq/libs": "^0.0.6",
     "turndown": "^7.1.1"
   },

@@ -1,5 +1,6 @@
 import "@logseq/libs"
 import TurndownService from 'turndown';
+import {gfm} from '@guyplusplus/turndown-plugin-gfm'
 
 async function main() {
   let mainContentContainer = parent.document.getElementById(
@@ -9,9 +10,18 @@ async function main() {
   const turndownService = new TurndownService({
     "headingStyle": "atx",
     "codeBlockStyle": "fenced",
+    "hr": "---",
   })
 
+  gfm(turndownService)
+
   turndownService.remove('style')
+  turndownService.addRule( 'pre', {
+    filter: [ 'pre' ],
+    replacement: content => {
+        return '```\n' + content.trim() + '\n```'
+    }
+  });
 
   const pasteHandler = (e) => {
     if(e.clipboardData.files.length > 0) {
