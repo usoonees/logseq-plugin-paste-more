@@ -23,6 +23,10 @@ async function main() {
     }
   });
 
+  turndownService.escape = (string) => {
+    return string
+  }
+
   const pasteHandler = (e) => {
     if(e.clipboardData.files.length > 0) {
       return
