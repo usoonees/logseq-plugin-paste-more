@@ -50,6 +50,11 @@ async function main() {
           children: b.children.length ? b.children : undefined,
         };
       });
+      
+      if (newBlocks.length === 0) {
+        logseq.Editor.insertAtEditingCursor(markdown)
+        return
+      } 
 
       await logseq.Editor.insertBatchBlock(block.uuid, newBlocks, {
         sibling: true,
