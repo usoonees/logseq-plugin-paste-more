@@ -1,16 +1,19 @@
 import "@logseq/libs"
 import TurndownService from 'turndown';
 import {gfm} from '@guyplusplus/turndown-plugin-gfm'
+import { splitBlock } from "./splitBlock";
 
 async function main() {
   let mainContentContainer = parent.document.getElementById(
     "main-content-container",
   )
-
+  
   const turndownService = new TurndownService({
     "headingStyle": "atx",
     "codeBlockStyle": "fenced",
     "hr": "---",
+    // @ts-ignore
+    "bulletListMarker": "",
   })
 
   gfm(turndownService)
@@ -27,20 +30,30 @@ async function main() {
     return string
   }
 
-  const pasteHandler = (e) => {
+  async function pasteHandler(e: ClipboardEvent) {
     if(e.clipboardData.files.length > 0) {
       return
     }
 
     const html = e.clipboardData.getData('text/html')
     if(html !== "") {
-      // console.log("=== debug: html source\n", html);
-      const markdown = turndownService.turndown(html).trim()
-      // console.log("=== debug: markdown result\n", markdown);
-      logseq.Editor.insertAtEditingCursor(markdown)
-
       e.preventDefault()
       e.stopPropagation()
+
+      const block = await logseq.Editor.getCurrentBlock()
+      const markdown = turndownService.turndown(html).trim()
+      console.log("markdown source", markdown)
+
+      const newBlocks = splitBlock(markdown).map((b) => {
+        return {
+          ...b,
+          children: b.children.length ? b.children : undefined,
+        };
+      });
+
+      await logseq.Editor.insertBatchBlock(block.uuid, newBlocks, {
+        sibling: true,
+      });
     }
   }
 
