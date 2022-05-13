@@ -46,7 +46,14 @@ export function splitBlock(blockContent: string) {
 
     let indent: number;
     if(content.startsWith("#")) {
-      indent = -1;
+      indent = -6;
+      for(let i=0;i<content.length;i++) {
+        if(content[i] === "#") {
+          indent++;
+        } else {
+          break;
+        }
+      }
     } else {
       indent = l.length - content.length;
     }
