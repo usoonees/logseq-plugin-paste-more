@@ -2,7 +2,7 @@ import { IBatchBlock } from "@logseq/libs/dist/LSPlugin.user";
 
 const isEmptyLine = (str: string) => /^\s*$/.test(str);
 
-export function splitBlock(blockContent: string) {
+export async function splitBlock(blockContent: string) {
   const linesSource = blockContent.split(/\n/).filter((line) => !isEmptyLine(line));
   if (linesSource.length === 1) {
     return [];
