@@ -42,9 +42,9 @@ async function main() {
 
       const block = await logseq.Editor.getCurrentBlock()
       const markdown = turndownService.turndown(html).trim()
-      console.log("markdown source", markdown)
 
-      const newBlocks = splitBlock(markdown).map((b) => {
+      const newBlocks = await splitBlock(markdown) // dont' freeze the whole process
+      newBlocks.map((b) => {
         return {
           ...b,
           children: b.children.length ? b.children : undefined,
@@ -52,7 +52,7 @@ async function main() {
       });
       
       if (newBlocks.length === 0) {
-        logseq.Editor.insertAtEditingCursor(markdown)
+        await logseq.Editor.insertAtEditingCursor(markdown)
         return
       } 
 
