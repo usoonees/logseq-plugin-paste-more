@@ -97,6 +97,11 @@ export function splitBlock(blockContent: string) {
       while (top.indent > indent) {
         stack.pop();
         if (stack.length === 0) {
+          batchBlock.push(nextBlock);
+          stack.push({
+            indent,
+            block: nextBlock,
+          });
           return;
         }
         top = stack[stack.length - 1];
