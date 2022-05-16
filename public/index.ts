@@ -31,13 +31,20 @@ async function main() {
     }
 
     const html = e.clipboardData.getData('text/html')
+    console.log("html source\n", html)
     if(html !== "") {
       e.preventDefault()
       e.stopPropagation()
 
       const block = await logseq.Editor.getCurrentBlock()
       // @ts-ignore
-      const markdown = turndownService.turndown(html).trim()
+      let markdown: string = turndownService.turndown(html).trim()
+
+      if(markdown.length > 6
+        && markdown.slice(0, 3) === "**\n" 
+        && markdown.slice(markdown.length-3) === "\n**") {
+        markdown = markdown.slice(3, markdown.length-3) // remove google docs **
+      }
 
       const newBlocks = splitBlock(markdown).map((b) => {
         return {
