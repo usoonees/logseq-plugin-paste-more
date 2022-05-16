@@ -222,7 +222,8 @@ rules.inlineLink = {
     return (
       options.linkStyle === 'inlined' &&
       node.nodeName === 'A' &&
-      node.getAttribute('href')
+      node.getAttribute('href') && 
+      (!node.firstChild || node.firstChild.nodeName !== 'IMG')
     )
   },
 

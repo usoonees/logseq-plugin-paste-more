@@ -1,5 +1,5 @@
 import "@logseq/libs"
-import TurndownService from 'turndown';
+import TurndownService from './turndown.js';
 import {gfm} from '@guyplusplus/turndown-plugin-gfm'
 import { splitBlock } from "./splitBlock";
 
@@ -19,13 +19,8 @@ async function main() {
   gfm(turndownService)
 
   turndownService.remove('style')
-  turndownService.addRule( 'pre', {
-    filter: [ 'pre' ],
-    replacement: content => {
-        return '```\n' + content.trim() + '\n```'
-    }
-  });
 
+  // @ts-ignore
   turndownService.escape = (string) => {
     return string
   }
@@ -41,10 +36,10 @@ async function main() {
       e.stopPropagation()
 
       const block = await logseq.Editor.getCurrentBlock()
+      // @ts-ignore
       const markdown = turndownService.turndown(html).trim()
 
-      const newBlocks = await splitBlock(markdown) // dont' freeze the whole process
-      newBlocks.map((b) => {
+      const newBlocks = splitBlock(markdown).map((b) => {
         return {
           ...b,
           children: b.children.length ? b.children : undefined,
