@@ -1,10 +1,16 @@
 # logseq-plugin-paste-more
-* I spent a lot of time pasting titles and links of leetcode problem, this simple plugin can save your time from pasting links. 
-* It can also convert other common formats, the process is based on [turndown](https://github.com/mixmark-io/turndown).
+Retain formatting when pasting from external sources.
 
-### Paste with link
-![paste with link](./leetcode_paste.gif)
-
-### Paste with head
+### Paste from Github
 ![paste with head](./logseq_paste.gif)
-Thanks [logseq-plugin-split-block](https://github.com/hyrijk/logseq-plugin-split-block) for outdent and indent logic!
+
+### Paste from Google Docs
+![paste with head](./google_docs.gif)
+
+### Paste with image link
+![paste with image](./image.gif)
+
+
+### Acknowledgement
+* [turndown](https://github.com/mixmark-io/turndown) for converting html to markdown.
+* [logseq-plugin-split-block](https://github.com/hyrijk/logseq-plugin-split-block) for logic of indent.
