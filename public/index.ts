@@ -31,7 +31,8 @@ async function main() {
     }
 
     const html = e.clipboardData.getData('text/html')
-    console.log("html source\n", html)
+    // console.log("html source\n", html)
+
     if(html !== "") {
       e.preventDefault()
       e.stopPropagation()
@@ -45,6 +46,8 @@ async function main() {
         && markdown.slice(markdown.length-3) === "\n**") {
         markdown = markdown.slice(3, markdown.length-3) // remove google docs **
       }
+
+      // console.log("markdown result\n", markdown)
 
       const newBlocks = splitBlock(markdown).map((b) => {
         return {
