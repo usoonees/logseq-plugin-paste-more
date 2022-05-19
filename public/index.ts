@@ -16,6 +16,13 @@ async function main() {
     "bulletListMarker": "",
   })
 
+  turndownService.addRule( 'pre', {
+    filter: [ 'pre' ],
+    replacement: content => {
+        return '```\n' + content.trim() + '\n```'
+    }
+  });
+
   gfm(turndownService)
 
   turndownService.remove('style')
@@ -40,6 +47,7 @@ async function main() {
       const block = await logseq.Editor.getCurrentBlock()
       // @ts-ignore
       let markdown: string = turndownService.turndown(html).trim()
+      // console.log("html source\n", html)
 
       if(markdown.length > 6
         && markdown.slice(0, 3) === "**\n" 

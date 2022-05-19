@@ -18,7 +18,7 @@ export function splitBlock(blockContent: string) {
       i++;
 
       while(i < linesSource.length && !linesSource[i].trim().startsWith("```")) {
-        codeLines.push(linesSource[i]);
+        codeLines.push("  "+linesSource[i]);
         i++;
       }
 
@@ -32,6 +32,10 @@ export function splitBlock(blockContent: string) {
       lines.push(line);
       i++;
     }
+  }
+
+  if (lines.length === 1) {
+    return []
   }
 
   const batchBlock: IBatchBlock[] = [];

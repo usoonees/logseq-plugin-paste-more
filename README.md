@@ -1,6 +1,8 @@
 # logseq-plugin-paste-more
 Retain formatting when pasting from external sources.
 
+You can still use `mod+shift+t` to paste plain text.
+
 ### Paste from Github
 ![paste with head](./logseq_paste.gif)
 
