@@ -38,7 +38,6 @@ async function main() {
     }
 
     const html = e.clipboardData.getData('text/html')
-    // console.log("html source\n", html)
 
     if(html !== "") {
       e.preventDefault()
@@ -56,6 +55,11 @@ async function main() {
       }
 
       // console.log("markdown result\n", markdown)
+
+      if(block && block.content.startsWith('#+')){
+        await logseq.Editor.insertAtEditingCursor(markdown)
+        return
+      }
 
       const newBlocks = splitBlock(markdown).map((b) => {
         return {
