@@ -4,6 +4,14 @@ import {gfm} from '@guyplusplus/turndown-plugin-gfm'
 import { splitBlock } from "./splitBlock";
 
 async function main() {
+  logseq.useSettingsSchema([{
+    key: "indentHeaders",
+    title: 'Whether to indent headers',
+    type: "boolean",
+    default: true,
+    description: ''
+  }]);
+
   let mainContentContainer = parent.document.getElementById(
     "main-content-container",
   )
@@ -61,7 +69,7 @@ async function main() {
         return
       }
 
-      const newBlocks = splitBlock(markdown).map((b) => {
+      const newBlocks = splitBlock(markdown, logseq.settings?.indentHeaders).map((b) => {
         return {
           ...b,
           children: b.children.length ? b.children : undefined,
