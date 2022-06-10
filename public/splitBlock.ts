@@ -2,7 +2,7 @@ import { IBatchBlock } from "@logseq/libs/dist/LSPlugin.user";
 
 const isEmptyLine = (str: string) => /^\s*$/.test(str);
 
-export function splitBlock(blockContent: string) {
+export function splitBlock(blockContent: string, indentHeaders: boolean) {
   const linesSource = blockContent.split(/\n/).filter((line) => !isEmptyLine(line));
   if (linesSource.length === 1) {
     return [];
@@ -50,13 +50,17 @@ export function splitBlock(blockContent: string) {
 
     let indent: number;
     if(content.startsWith("#")) {
-      indent = -6;
-      for(let i=0;i<content.length;i++) {
-        if(content[i] === "#") {
-          indent++;
-        } else {
-          break;
+      if(indentHeaders) {
+        indent = -6;
+        for(let i=0;i<content.length;i++) {
+          if(content[i] === "#") {
+            indent++;
+          } else {
+            break;
+          }
         }
+      } else {
+        indent = 0;
       }
     } else {
       indent = l.length - content.length;
