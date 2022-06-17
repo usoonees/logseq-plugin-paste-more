@@ -55,6 +55,7 @@ async function main() {
       // @ts-ignore
       let markdown: string = turndownService.turndown(html).trim()
       // console.log("html source\n", html)
+      // console.log("markdown result\n", markdown)
 
       if(markdown.length > 6
         && markdown.slice(0, 3) === "**\n" 
@@ -62,7 +63,6 @@ async function main() {
         markdown = markdown.slice(3, markdown.length-3) // remove google docs **
       }
 
-      // console.log("markdown result\n", markdown)
 
       if(block && block.content.startsWith('#+')){
         await logseq.Editor.insertAtEditingCursor(markdown)
