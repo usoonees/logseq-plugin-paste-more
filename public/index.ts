@@ -4,13 +4,22 @@ import {gfm} from '@guyplusplus/turndown-plugin-gfm'
 import { splitBlock } from "./splitBlock";
 
 async function main() {
-  logseq.useSettingsSchema([{
+  logseq.useSettingsSchema([
+  {
     key: "indentHeaders",
     title: 'Whether to indent headers',
     type: "boolean",
     default: true,
     description: ''
-  }]);
+  },
+  {
+    key: "newLineBlock",
+    title: 'Whether create a new block for new line',
+    type: "boolean",
+    default: true,
+    description: ''
+  },
+]);
 
   let mainContentContainer = parent.document.getElementById(
     "main-content-container",
@@ -64,7 +73,7 @@ async function main() {
       }
 
 
-      if(block && block.content.startsWith('#+')){
+      if((block && block.content.startsWith('#+')) || logseq.settings?.newLineBlock === false) {
         await logseq.Editor.insertAtEditingCursor(markdown)
         return
       }

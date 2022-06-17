@@ -8,7 +8,7 @@ export function splitBlock(blockContent: string, indentHeaders: boolean) {
     return [];
   }
 
-  let lines: string[] = []; // join ```
+  let lines: string[] = []; // join ```, and table
   let i: number = 0;
   while(i < linesSource.length){
     const line = linesSource[i];
@@ -28,6 +28,16 @@ export function splitBlock(blockContent: string, indentHeaders: boolean) {
         i++;
       }
 
+    } else if (line.trim().startsWith("|")) {
+      let tableLines: string[] = [line];
+      i++;
+
+      while(i < linesSource.length && linesSource[i].trim().startsWith("|")) {
+        tableLines.push(linesSource[i]);
+        i++;
+      }
+      lines.push(tableLines.join("\n"));
+      
     } else {
       lines.push(line);
       i++;
