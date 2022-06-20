@@ -152,7 +152,7 @@ rules.listItem = {
     if (parent.nodeName === 'OL') {
       var start = parent.getAttribute('start');
       var index = Array.prototype.indexOf.call(parent.children, node);
-      prefix = (start ? Number(start) + index : index + 1) + '.  ';
+      prefix = space + (start ? Number(start) + index : index + 1) + '.  ';
     }
     return (
       prefix + content + (node.nextSibling && !/\n$/.test(content) ? '\n' : '')
@@ -471,6 +471,8 @@ function collapseWhitespace (options) {
 
   var prev = null;
   var node = next(prev, element, isPre);
+
+  console.log("node:"+node)
 
   while (node !== element) {
     if (node.nodeType === 3 || node.nodeType === 4) { // Node.TEXT_NODE or Node.CDATA_SECTION_NODE
