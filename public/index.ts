@@ -24,13 +24,12 @@ async function main() {
   let mainContentContainer = parent.document.getElementById(
     "main-content-container",
   )
-  
+  const bulletTmpMarker = "@b@"  // have to use this for temp, otherwise there is an indent error
   const turndownService = new TurndownService({
     "headingStyle": "atx",
     "codeBlockStyle": "fenced",
     "hr": "---",
-    // @ts-ignore
-    "bulletListMarker": "",
+    "bulletListMarker": bulletTmpMarker,
   })
 
   turndownService.addRule( 'pre', {
@@ -63,8 +62,9 @@ async function main() {
       const block = await logseq.Editor.getCurrentBlock()
       // @ts-ignore
       let markdown: string = turndownService.turndown(html).trim()
+      markdown = markdown.replaceAll(bulletTmpMarker, '')
       // console.log("html source\n", html)
-      // console.log("markdown result\n", markdown)
+      // console.log("markdown result\n"+markdown)
 
       if(markdown.length > 6
         && markdown.slice(0, 3) === "**\n" 
