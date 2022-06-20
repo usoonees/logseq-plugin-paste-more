@@ -72,7 +72,7 @@ async function main() {
 
 
       if((block && block.content.startsWith('#+')) || logseq.settings?.newLineBlock === false) {
-        await logseq.Editor.insertAtEditingCursor(markdown)
+        await logseq.Editor.insertAtEditingCursor(markdown.trim())
         return
       }
 
@@ -84,7 +84,7 @@ async function main() {
       });
       
       if (newBlocks.length === 0) {
-        await logseq.Editor.insertAtEditingCursor(markdown)
+        await logseq.Editor.insertAtEditingCursor(markdown.trim())
         return
       } 
 
