@@ -3,7 +3,7 @@ Retain formatting when pasting from external sources.
 
 You can still use `mod+shift+t` to paste plain text.
 
-**Update**: logseq supports `Copy & Paste with rich-text formats` internally since version 0.7.1, but it maybe doesn't parse the content well in some scenario. You can try this plugin to see if it pastes as your expectation.
+**Update**: logseq has supported `Copy & Paste with rich-text formats` internally since version 0.7.1, but it doesn't parse well in some scenario. You can try this plugin to see if it pastes as your expectation.
 
 
 **Paste Table**
