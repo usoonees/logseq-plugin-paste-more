@@ -54,7 +54,9 @@ async function main() {
 
     const html = e.clipboardData.getData('text/html')
 
-    if(html !== "") {
+    if(html !== "" &&
+      (html.length < 45 || html.slice(22, 45) != '<!-- directives: [] -->') // within logseq
+      ) { 
       e.preventDefault()
       e.stopPropagation()
 
