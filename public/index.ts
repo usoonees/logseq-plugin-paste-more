@@ -19,8 +19,15 @@ async function main() {
     default: true,
     description: ''
   },
+  {
+    key: "KeyboardShortcut_paste",
+    title: 'Keyboard shortcut to enable/disable this plugin',
+    type: "string",
+    default: "mod+ctrl+shift+v",
+    description: ''
+  }
 ]);
-
+  let enable = true;
   let mainContentContainer = parent.document.getElementById(
     "main-content-container",
   )
@@ -100,6 +107,24 @@ async function main() {
 
   logseq.beforeunload(async () => {
     mainContentContainer.removeEventListener("paste", pasteHandler)
+  })
+
+  logseq.App.registerCommandPalette({
+    key: `paste-keyboard-shortcut`,
+    label: "enable/disable paste more",
+    keybinding: {
+      binding: logseq.settings.KeyboardShortcut_paste,
+      mode: "global",
+    }
+  }, async () => {
+    enable = !enable
+    if(enable) {
+      mainContentContainer.addEventListener("paste", pasteHandler)
+      logseq.UI.showMsg("Enable paste more plugin", "success");
+    } else {
+      mainContentContainer.removeEventListener("paste", pasteHandler)
+      logseq.UI.showMsg("Disable paste more plugin", "success");
+    }
   })
 }
 

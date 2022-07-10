@@ -5,6 +5,10 @@ You can still use `mod+shift+t` to paste plain text.
 
 **Update**: logseq has supported `Copy & Paste with rich-text formats` internally since version 0.7.1, but it doesn't parse well in some scenario. You can try this plugin to see if it pastes as your expectation.
 
+You can enable/disable this plugin by command or pressing `mod+ctrl+shift+v` (custom the shortcut in settings).
+![](disable.png)  
+
+## Paste Demo
 
 **Paste Table**
 ![paste with head](./table.gif)

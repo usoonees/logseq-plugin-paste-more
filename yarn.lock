@@ -2,6 +2,13 @@
 # yarn lockfile v1
 
 
+"@guyplusplus/turndown-plugin-gfm@^1.0.7":
+  version "1.0.7"
+  resolved "https://registry.npmmirror.com/@guyplusplus/turndown-plugin-gfm/-/turndown-plugin-gfm-1.0.7.tgz#55c07d549a321a956a1657db1b3858f362c9c5e1"
+  integrity sha512-k2KATk491JIeq1KNsjOwaD88cdknQeTpKVXh9OuZfHdjFuSEtEVVDCfCbxzmRvJxeKDPbZQl8DGP5o7SaIvWBw==
+  dependencies:
+    turndown "^7.1.1"
+
 "@logseq/libs@^0.0.6":
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/@logseq/libs/-/libs-0.0.6.tgz#a8270d5bd71bccf13455634f9a2aac2572a0b935"
