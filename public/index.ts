@@ -25,9 +25,16 @@ async function main() {
     type: "string",
     default: "mod+ctrl+shift+v",
     description: ''
+  },
+  {
+    key: "enablePasteMore",
+    title: 'Enable paste more',
+    type: "boolean",
+    default: true,
+    description: ''
   }
 ]);
-  let enable = true;
+  let enable = logseq.settings.enablePasteMore;
   let mainContentContainer = parent.document.getElementById(
     "main-content-container",
   )
@@ -102,8 +109,9 @@ async function main() {
       });
     }
   }
-
-  mainContentContainer.addEventListener("paste", pasteHandler)
+  if (enable) {
+    mainContentContainer.addEventListener("paste", pasteHandler)
+  }
 
   logseq.beforeunload(async () => {
     mainContentContainer.removeEventListener("paste", pasteHandler)
@@ -118,6 +126,7 @@ async function main() {
     }
   }, async () => {
     enable = !enable
+    logseq.updateSettings({"enablePasteMore": enable})
     if(enable) {
       mainContentContainer.addEventListener("paste", pasteHandler)
       logseq.UI.showMsg("Enable paste more plugin", "success");
