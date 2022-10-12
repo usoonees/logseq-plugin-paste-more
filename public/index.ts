@@ -41,13 +41,13 @@ async function main() {
     };
   }
   logseq.provideModel(createModel());
-  const triggerIconName = "logseq-paste-more-icon";
+  const triggerIconName = "ti-clipboard";
 
   logseq.App.registerUIItem("toolbar", {
     key: "paste-plugin-button",
     template: `
-    <a data-on-click="controlUsage">
-      <div class="${triggerIconName}"></div>
+    <a class="button" data-on-click="controlUsage" data-rect>
+      <i class="ti ${triggerIconName}"></i>
     </a>
   `});
   const css = (t, ...args) => String.raw(t, ...args);
@@ -57,13 +57,8 @@ async function main() {
   const disableColor = "#6b7280"
   let backgroundColor = enable ? enableColor : disableColor;
   logseq.provideStyle(css`
-  .${triggerIconName} {
-    width: 18px;
-    height: 18px;
-    margin: 2px 0.1em 0 0.1em;
-    background-color: ${backgroundColor};
-    border-radius: 4px;
-    border: 1px solid #eee;
+  .${triggerIconName}:before {
+    color: ${backgroundColor};
   }
 `);
   let mainContentContainer = parent.document.getElementById(
@@ -156,15 +151,15 @@ async function main() {
     logseq.updateSettings({"enablePasteMore": enable})
     if(enable) {
       logseq.provideStyle(css`
-      .${triggerIconName} {
-        background-color: ${enableColor};
+      .${triggerIconName}:before {
+        color: ${enableColor};
       }`);
       mainContentContainer.addEventListener("paste", pasteHandler)
       logseq.UI.showMsg("Enable paste more plugin", "success");
     } else {
       logseq.provideStyle(css`
-      .${triggerIconName} {
-        background-color: ${disableColor};
+      .${triggerIconName}:before {
+        color: ${disableColor};
       }`);
       mainContentContainer.removeEventListener("paste", pasteHandler)
       logseq.UI.showMsg("Disable paste more plugin", "success");
