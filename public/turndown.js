@@ -124,6 +124,13 @@ rules.list = {
   filter: ['ul', 'ol'],
 
   replacement: function (content, node) {
+    if (/ul\d+/.test(node.className)) {
+      let children = content.split('\n')
+      children.forEach(function (item, idx) {
+        children[idx] = ' ' + item
+      })
+      return '\n' + children.join('\n') + '\n'
+    }
     var parent = node.parentNode;
     if (parent.nodeName === 'LI' && parent.lastElementChild === node) {
       return '\n' + content
