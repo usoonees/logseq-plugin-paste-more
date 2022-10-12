@@ -62,7 +62,10 @@ async function main() {
   }
 
   async function pasteHandler(e: ClipboardEvent) {
-    if(e.clipboardData.files.length > 0) {
+    const pasteTypes = e.clipboardData.types
+
+    if(pasteTypes.includes("Files") && !pasteTypes.includes("text/plain")) {
+      console.log("use logseq default action")
       return
     }
 
