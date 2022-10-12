@@ -34,7 +34,38 @@ async function main() {
     description: ''
   }
 ]);
+
+  function createModel() {
+    return {
+      controlUsage
+    };
+  }
+  logseq.provideModel(createModel());
+  const triggerIconName = "logseq-paste-more-icon";
+
+  logseq.App.registerUIItem("toolbar", {
+    key: "paste-plugin-button",
+    template: `
+    <a data-on-click="controlUsage">
+      <div class="${triggerIconName}"></div>
+    </a>
+  `});
+  const css = (t, ...args) => String.raw(t, ...args);
+
   let enable = logseq.settings.enablePasteMore;
+  const enableColor = "#3b82f6";
+  const disableColor = "#6b7280"
+  let backgroundColor = enable ? enableColor : disableColor;
+  logseq.provideStyle(css`
+  .${triggerIconName} {
+    width: 18px;
+    height: 18px;
+    margin: 2px 0.1em 0 0.1em;
+    background-color: ${backgroundColor};
+    border-radius: 4px;
+    border: 1px solid #eee;
+  }
+`);
   let mainContentContainer = parent.document.getElementById(
     "main-content-container",
   )
@@ -120,6 +151,26 @@ async function main() {
     mainContentContainer.removeEventListener("paste", pasteHandler)
   })
 
+  async function controlUsage() {
+    enable = !enable
+    logseq.updateSettings({"enablePasteMore": enable})
+    if(enable) {
+      logseq.provideStyle(css`
+      .${triggerIconName} {
+        background-color: ${enableColor};
+      }`);
+      mainContentContainer.addEventListener("paste", pasteHandler)
+      logseq.UI.showMsg("Enable paste more plugin", "success");
+    } else {
+      logseq.provideStyle(css`
+      .${triggerIconName} {
+        background-color: ${disableColor};
+      }`);
+      mainContentContainer.removeEventListener("paste", pasteHandler)
+      logseq.UI.showMsg("Disable paste more plugin", "success");
+    }
+  }
+
   logseq.App.registerCommandPalette({
     key: `paste-keyboard-shortcut`,
     label: "enable/disable paste more",
@@ -127,17 +178,7 @@ async function main() {
       binding: logseq.settings.KeyboardShortcut_paste,
       mode: "global",
     }
-  }, async () => {
-    enable = !enable
-    logseq.updateSettings({"enablePasteMore": enable})
-    if(enable) {
-      mainContentContainer.addEventListener("paste", pasteHandler)
-      logseq.UI.showMsg("Enable paste more plugin", "success");
-    } else {
-      mainContentContainer.removeEventListener("paste", pasteHandler)
-      logseq.UI.showMsg("Disable paste more plugin", "success");
-    }
-  })
+  }, controlUsage)
 }
 
 
