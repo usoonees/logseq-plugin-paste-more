@@ -1,31 +1,33 @@
 # logseq-plugin-paste-more
 Retain formatting when pasting from external sources.
 
-You can still use `mod+shift+t` to paste plain text.
+You can still use `mod+shift+v` to paste plain text.
 
 **Update**: logseq has supported `Copy & Paste with rich-text formats` internally since version 0.7.1, but it doesn't parse well in some scenario. You can try this plugin to see if it pastes as your expectation.
 
 You can enable/disable this plugin by clicking the icon, blue means enabled, gray means disabled.
-![](control.png)  
+<p align="center">
+	<img src="image/control.png" alt="drawing" width="300"/>
+</p>
 
 ## Paste Demo
 
-**Paste Table**
-![paste with head](./table.gif)
+
+Paste from Excel             |  Paste from Feishu Docs Table
+:-------------------------:|:-------------------------:
+![Paste from Excel](image/excel.gif)  |  ![Paste from feishu table](image/table.gif)
 
 
 **Paste from Github**
-![paste with head](./logseq_paste.gif)
+![paste with head](image/logseq_paste.gif)
 
 **Paste from Google Docs**
-![paste with head](./google_docs.gif)
+![paste with head](image/google_docs.gif)
 
-**Paste with image**
-![paste with image](./image.gif)
 
 #### Settings
 Whether indent headers?
-![](settings.png)
+![](image/settings.png)
 
 #### Acknowledgement
 * [turndown](https://github.com/mixmark-io/turndown) for converting html to markdown.
