@@ -53,8 +53,8 @@ async function main() {
   const css = (t, ...args) => String.raw(t, ...args);
 
   let enable = logseq.settings.enablePasteMore;
-  const enableColor = "#3b82f6";
-  const disableColor = "#6b7280"
+  const enableColor = "#6b7280";
+  const disableColor = "#ff0000"
   let backgroundColor = enable ? enableColor : disableColor;
   logseq.provideStyle(css`
   .${triggerIconName}:before {
