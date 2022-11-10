@@ -41,7 +41,12 @@ async function main() {
     };
   }
   logseq.provideModel(createModel());
-  const triggerIconName = "ti-clipboard";
+
+
+  let enable = logseq.settings.enablePasteMore;
+  const enableIcon = "ti-clipboard"
+  const disableIcon = "ti-clipboard-x"
+  let triggerIconName = enable? enableIcon: disableIcon;
 
   logseq.App.registerUIItem("toolbar", {
     key: "paste-plugin-button",
@@ -52,15 +57,6 @@ async function main() {
   `});
   const css = (t, ...args) => String.raw(t, ...args);
 
-  let enable = logseq.settings.enablePasteMore;
-  const enableColor = "#6b7280";
-  const disableColor = "#ff0000"
-  let backgroundColor = enable ? enableColor : disableColor;
-  logseq.provideStyle(css`
-  .${triggerIconName}:before {
-    color: ${backgroundColor};
-  }
-`);
   let mainContentContainer = parent.document.getElementById(
     "main-content-container",
   )
@@ -150,17 +146,11 @@ async function main() {
     enable = !enable
     logseq.updateSettings({"enablePasteMore": enable})
     if(enable) {
-      logseq.provideStyle(css`
-      .${triggerIconName}:before {
-        color: ${enableColor};
-      }`);
+      parent.document.querySelector(`.ti.${disableIcon}`).classList.replace(disableIcon, enableIcon)
       mainContentContainer.addEventListener("paste", pasteHandler)
       logseq.UI.showMsg("Enable paste more plugin", "success");
     } else {
-      logseq.provideStyle(css`
-      .${triggerIconName}:before {
-        color: ${disableColor};
-      }`);
+      parent.document.querySelector(`.ti.${enableIcon}`).classList.replace(enableIcon, disableIcon)
       mainContentContainer.removeEventListener("paste", pasteHandler)
       logseq.UI.showMsg("Disable paste more plugin", "success");
     }
