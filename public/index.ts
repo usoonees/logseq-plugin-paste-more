@@ -2,9 +2,9 @@ import "@logseq/libs"
 import TurndownService from './turndown.js';
 import {gfm} from '@guyplusplus/turndown-plugin-gfm'
 import { splitBlock } from "./splitBlock";
+import { SettingSchemaDesc } from "@logseq/libs/dist/LSPlugin.user";
 
-async function main() {
-  logseq.useSettingsSchema([
+const settings: SettingSchemaDesc[] = [
   {
     key: "indentHeaders",
     title: 'Whether to indent headers',
@@ -31,10 +31,10 @@ async function main() {
     title: 'Enable paste more',
     type: "boolean",
     default: true,
-    description: ''
-  }
-]);
+    description: ''}
+];
 
+async function main() {
   function createModel() {
     return {
       controlUsage
@@ -177,4 +177,4 @@ async function main() {
 }
 
 
-logseq.ready(main).catch(console.error)
+logseq.useSettingsSchema(settings).ready(main).catch(console.error)
