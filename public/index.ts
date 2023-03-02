@@ -96,10 +96,13 @@ async function main() {
     }
 
     const html = e.clipboardData.getData('text/html')
+    const internalSign = "<meta charset='utf-8'><ul><placeholder>"
 
     if(html !== "" &&
-      (html.length < 45 || html.slice(22, 45) != '<!-- directives: [] -->') // within logseq
-      ) { 
+      (html.length < 45 || html.slice(22, 45) != '<!-- directives: [] -->') // within logseq before v0.8.8
+      && html.slice(0, internalSign.length) != internalSign // within logseq after v0.8.8
+      ) 
+      { 
       e.preventDefault()
       e.stopPropagation()
 
