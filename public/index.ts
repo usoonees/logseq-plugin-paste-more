@@ -20,13 +20,6 @@ const settings: SettingSchemaDesc[] = [
     description: ''
   },
   {
-    key: "KeyboardShortcut_paste",
-    title: 'Keyboard shortcut to enable/disable this plugin',
-    type: "string",
-    default: "mod+ctrl+shift+v",
-    description: ''
-  },
-  {
     key: "enablePasteMore",
     title: 'Enable paste more',
     type: "boolean",
@@ -172,10 +165,10 @@ async function main() {
   logseq.App.registerCommandPalette({
     key: `paste-keyboard-shortcut`,
     label: "enable/disable paste more",
-    keybinding: {
-      binding: logseq.settings.KeyboardShortcut_paste,
-      mode: "global",
-    }
+    // keybinding: {
+    //   binding: logseq.settings.KeyboardShortcut_paste,
+    //   mode: "global",
+    // }
   }, controlUsage)
 }
 

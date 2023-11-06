@@ -1,6 +1,6 @@
 {
   "name": "logseq-plugin-paste-more",
-  "version": "1.5.6",
+  "version": "1.5.8",
   "main": "dist/index.html",
   "logseq": {
     "id": "_usoon-logseq-paste-more",
