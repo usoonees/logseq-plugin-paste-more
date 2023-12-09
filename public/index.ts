@@ -100,6 +100,10 @@ async function main() {
       e.stopPropagation()
 
       const block = await logseq.Editor.getCurrentBlock()
+      if (block.content.startsWith("```")) {
+        // ignore code block
+        return
+      }
       // @ts-ignore
       let markdown: string = turndownService.turndown(html)
       // console.log("html source\n", html)
